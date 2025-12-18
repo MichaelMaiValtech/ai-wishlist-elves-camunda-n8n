@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="drd" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Web Modeler" exporterVersion="e787c33" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
+  <decision id="Decision_inspectWishlistN8nResponse" name="Inspect Wishlist N8n Response">
+    <decisionTable id="DecisionTable_1v791xu" hitPolicy="FIRST">
+      <input id="Input_1" label="n8nOutput">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>n8nOutput</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="approvalRequired" typeRef="boolean" />
+      <output id="OutputClause_14sf3r2" label="directlyGranted" name="directlyGranted" typeRef="boolean" />
+      <rule id="DecisionRule_126hxec">
+        <inputEntry id="UnaryTests_19bpfkf">
+          <text>"this is all perfect and cheap"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0uevtch">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0fdf55m">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0i6g1sk">
+        <inputEntry id="UnaryTests_19l53hj">
+          <text>"good idea but expensive"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1w7q51v">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0jxj9os">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_inspectWishlistN8nResponse">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
