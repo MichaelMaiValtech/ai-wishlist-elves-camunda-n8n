@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="e787c33" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
+  <bpmn:process id="Process_wishlist_2025" name="wishlist-process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_wishlistForm" name="Start by form">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formId="Form_wishlistEntry" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_0p9h33i</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:startEvent id="StartEvent_webHook" name="Start by web-hook" zeebe:modelerTemplate="io.camunda.connectors.webhook.WebhookConnectorStartMessage.v1" zeebe:modelerTemplateVersion="13" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyBpZD0naWNvbicgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB3aWR0aD0nMTgnIGhlaWdodD0nMTgnIHZpZXdCb3g9JzAgMCAzMiAzMic+CiAgPGRlZnM+CiAgICA8c3R5bGU+LmNscy0xIHsgZmlsbDogbm9uZTsgfTwvc3R5bGU+CiAgPC9kZWZzPgogIDxwYXRoCiAgICBkPSdNMjQsMjZhMywzLDAsMSwwLTIuODE2NC00SDEzdjFhNSw1LDAsMSwxLTUtNVYxNmE3LDcsMCwxLDAsNi45Mjg3LDhoNi4yNTQ5QTIuOTkxNCwyLjk5MTQsMCwwLDAsMjQsMjZaJy8+CiAgPHBhdGgKICAgIGQ9J00yNCwxNmE3LjAyNCw3LjAyNCwwLDAsMC0yLjU3LjQ4NzNsLTMuMTY1Ni01LjUzOTVhMy4wNDY5LDMuMDQ2OSwwLDEsMC0xLjczMjYuOTk4NWw0LjExODksNy4yMDg1Ljg2ODYtLjQ5NzZhNS4wMDA2LDUuMDAwNiwwLDEsMS0xLjg1MSw2Ljg0MThMMTcuOTM3LDI2LjUwMUE3LjAwMDUsNy4wMDA1LDAsMSwwLDI0LDE2WicvPgogIDxwYXRoCiAgICBkPSdNOC41MzIsMjAuMDUzN2EzLjAzLDMuMDMsMCwxLDAsMS43MzI2Ljk5ODVDMTEuNzQsMTguNDcsMTMuODYsMTQuNzYwNywxMy44OSwxNC43MDhsLjQ5NzYtLjg2ODItLjg2NzctLjQ5N2E1LDUsMCwxLDEsNi44MTItMS44NDM4bDEuNzMxNSwxLjAwMmE3LjAwMDgsNy4wMDA4LDAsMSwwLTEwLjM0NjIsMi4wMzU2Yy0uNDU3Ljc0MjctMS4xMDIxLDEuODcxNi0yLjA3MzcsMy41NzI4WicvPgogIDxyZWN0IGlkPSdfVHJhbnNwYXJlbnRfUmVjdGFuZ2xlXycgZGF0YS1uYW1lPScmbHQ7VHJhbnNwYXJlbnQgUmVjdGFuZ2xlJmd0OycgY2xhc3M9J2Nscy0xJwogICAgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJy8+Cjwvc3ZnPg==">
+      <bpmn:extensionElements>
+        <zeebe:properties>
+          <zeebe:property name="inbound.type" value="io.camunda:webhook:1" />
+          <zeebe:property name="inbound.method" value="post" />
+          <zeebe:property name="inbound.context" value="wishlist" />
+          <zeebe:property name="inbound.shouldValidateHmac" value="disabled" />
+          <zeebe:property name="inbound.auth.type" value="NONE" />
+          <zeebe:property name="inbound.responseExpression" value="={&#34;body&#34;:{&#34;response&#34;: &#34;we process your wishlist&#34;}}" />
+          <zeebe:property name="consumeUnmatchedEvents" value="true" />
+          <zeebe:property name="correlationRequired" value="notRequired" />
+          <zeebe:property name="deduplicationModeManualFlag" value="false" />
+          <zeebe:property name="deduplicationMode" value="AUTO" />
+          <zeebe:property name="resultVariable" value="webInbound" />
+          <zeebe:property name="resultExpression" value="" />
+        </zeebe:properties>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_1iumie1</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0ob45tk" messageRef="Message_0n0356b" />
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_0yorn3e">
+      <bpmn:incoming>Flow_0p9h33i</bpmn:incoming>
+      <bpmn:incoming>Flow_0nza9ua</bpmn:incoming>
+      <bpmn:outgoing>Flow_1u7p1n8</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0p9h33i" sourceRef="StartEvent_wishlistForm" targetRef="Gateway_0yorn3e" />
+    <bpmn:sequenceFlow id="Flow_0nza9ua" sourceRef="Activity_deconstructWebHookStart" targetRef="Gateway_0yorn3e" />
+    <bpmn:sequenceFlow id="Flow_1u7p1n8" sourceRef="Gateway_0yorn3e" targetRef="Activity_buildRequest" />
+    <bpmn:sequenceFlow id="Flow_1al38at" sourceRef="Activity_buildRequest" targetRef="Activity_callN8n" />
+    <bpmn:scriptTask id="Activity_buildRequest" name="Build request body">
+      <bpmn:extensionElements>
+        <zeebe:script expression="=1" resultVariable="dummy" />
+        <zeebe:ioMapping>
+          <zeebe:output source="=from" target="wishlistFrom" />
+          <zeebe:output source="=wishlist" target="wishlistContent" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1u7p1n8</bpmn:incoming>
+      <bpmn:outgoing>Flow_1al38at</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:serviceTask id="Activity_callN8n" name="Call n8n (prod)" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="12" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="noAuth" target="authentication.type" />
+          <zeebe:input source="POST" target="method" />
+          <zeebe:input source="http://host.docker.internal:5678/webhook/wishlist" target="url" />
+          <zeebe:input source="=false" target="storeResponse" />
+          <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
+          <zeebe:input source="=20" target="readTimeoutInSeconds" />
+          <zeebe:input source="={&#10;  &#34;wishlistFrom&#34;: wishlistFrom,&#10;  &#34;wishlistContent&#34;: wishlistContent&#10;}" target="body" />
+          <zeebe:input source="=false" target="ignoreNullValues" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="12" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1al38at</bpmn:incoming>
+      <bpmn:outgoing>Flow_1iwtjzg</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_inquireApproval" name="Approval (form)">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="Form_wishlistApproval" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_13638yz</bpmn:incoming>
+      <bpmn:outgoing>Flow_18gb485</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1iwtjzg" sourceRef="Activity_callN8n" targetRef="Event_waitForN8nResponse" />
+    <bpmn:businessRuleTask id="Activity_inspectN8nResult" name="inspect if wishlist is dump">
+      <bpmn:extensionElements>
+        <zeebe:calledDecision decisionId="Decision_inspectWishlistN8nResponse" resultVariable="wishlistDecision" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_03ptxr2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1axx2ez</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:exclusiveGateway id="Gateway_07h5hex" default="Flow_1cf3kd2">
+      <bpmn:incoming>Flow_1axx2ez</bpmn:incoming>
+      <bpmn:outgoing>Flow_13638yz</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1cf3kd2</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0vbcsak</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1axx2ez" sourceRef="Activity_inspectN8nResult" targetRef="Gateway_07h5hex" />
+    <bpmn:sequenceFlow id="Flow_13638yz" name="approval required" sourceRef="Gateway_07h5hex" targetRef="Activity_inquireApproval">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=wishlistDecision.approvalRequired = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="Gateway_0as7t6k" default="Flow_16p01o2">
+      <bpmn:incoming>Flow_18gb485</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pv7omm</bpmn:outgoing>
+      <bpmn:outgoing>Flow_16p01o2</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_18gb485" sourceRef="Activity_inquireApproval" targetRef="Gateway_0as7t6k" />
+    <bpmn:task id="Activity_wishRejected" name="Wish rejected">
+      <bpmn:incoming>Flow_13a5t1a</bpmn:incoming>
+      <bpmn:outgoing>Flow_1xhzx7a</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1cf3kd2" sourceRef="Gateway_07h5hex" targetRef="Gateway_14k85hv" />
+    <bpmn:task id="Activity_wishGranted" name="Wish granted">
+      <bpmn:incoming>Flow_1xrkxlj</bpmn:incoming>
+      <bpmn:outgoing>Flow_0kehwhp</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0pv7omm" name="granted" sourceRef="Gateway_0as7t6k" targetRef="Gateway_05xyjdx">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=reject = false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_granted" name="wishlist granted">
+      <bpmn:incoming>Flow_0kehwhp</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0kehwhp" sourceRef="Activity_wishGranted" targetRef="Event_granted" />
+    <bpmn:endEvent id="Event_rejected" name="wishlist rejected">
+      <bpmn:incoming>Flow_1xhzx7a</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1xhzx7a" sourceRef="Activity_wishRejected" targetRef="Event_rejected" />
+    <bpmn:sequenceFlow id="Flow_1iumie1" sourceRef="StartEvent_webHook" targetRef="Activity_deconstructWebHookStart" />
+    <bpmn:scriptTask id="Activity_deconstructWebHookStart" name="Deconstruct request body">
+      <bpmn:extensionElements>
+        <zeebe:script expression="=1" resultVariable="dummy" />
+        <zeebe:ioMapping>
+          <zeebe:output source="=webInbound.request.body.from" target="from" />
+          <zeebe:output source="=webInbound.request.body.wishlist" target="wishlist" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1iumie1</bpmn:incoming>
+      <bpmn:outgoing>Flow_0nza9ua</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_0vbcsak" name="directly granted" sourceRef="Gateway_07h5hex" targetRef="Gateway_05xyjdx">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=wishlistDecision.directlyGranted = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="Gateway_14k85hv">
+      <bpmn:incoming>Flow_16p01o2</bpmn:incoming>
+      <bpmn:incoming>Flow_1cf3kd2</bpmn:incoming>
+      <bpmn:outgoing>Flow_13a5t1a</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_16p01o2" sourceRef="Gateway_0as7t6k" targetRef="Gateway_14k85hv" />
+    <bpmn:sequenceFlow id="Flow_13a5t1a" sourceRef="Gateway_14k85hv" targetRef="Activity_wishRejected" />
+    <bpmn:exclusiveGateway id="Gateway_05xyjdx">
+      <bpmn:incoming>Flow_0pv7omm</bpmn:incoming>
+      <bpmn:incoming>Flow_0vbcsak</bpmn:incoming>
+      <bpmn:outgoing>Flow_1xrkxlj</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1xrkxlj" sourceRef="Gateway_05xyjdx" targetRef="Activity_wishGranted" />
+    <bpmn:sequenceFlow id="Flow_1npzuj0" sourceRef="Event_waitForN8nResponse" targetRef="Activity_1llznhc" />
+    <bpmn:intermediateCatchEvent id="Event_waitForN8nResponse" name="wait for n8n response" zeebe:modelerTemplate="io.camunda.connectors.webhook.WebhookConnectorIntermediate.v1" zeebe:modelerTemplateVersion="13" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyBpZD0naWNvbicgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB3aWR0aD0nMTgnIGhlaWdodD0nMTgnIHZpZXdCb3g9JzAgMCAzMiAzMic+CiAgPGRlZnM+CiAgICA8c3R5bGU+LmNscy0xIHsgZmlsbDogbm9uZTsgfTwvc3R5bGU+CiAgPC9kZWZzPgogIDxwYXRoCiAgICBkPSdNMjQsMjZhMywzLDAsMSwwLTIuODE2NC00SDEzdjFhNSw1LDAsMSwxLTUtNVYxNmE3LDcsMCwxLDAsNi45Mjg3LDhoNi4yNTQ5QTIuOTkxNCwyLjk5MTQsMCwwLDAsMjQsMjZaJy8+CiAgPHBhdGgKICAgIGQ9J00yNCwxNmE3LjAyNCw3LjAyNCwwLDAsMC0yLjU3LjQ4NzNsLTMuMTY1Ni01LjUzOTVhMy4wNDY5LDMuMDQ2OSwwLDEsMC0xLjczMjYuOTk4NWw0LjExODksNy4yMDg1Ljg2ODYtLjQ5NzZhNS4wMDA2LDUuMDAwNiwwLDEsMS0xLjg1MSw2Ljg0MThMMTcuOTM3LDI2LjUwMUE3LjAwMDUsNy4wMDA1LDAsMSwwLDI0LDE2WicvPgogIDxwYXRoCiAgICBkPSdNOC41MzIsMjAuMDUzN2EzLjAzLDMuMDMsMCwxLDAsMS43MzI2Ljk5ODVDMTEuNzQsMTguNDcsMTMuODYsMTQuNzYwNywxMy44OSwxNC43MDhsLjQ5NzYtLjg2ODItLjg2NzctLjQ5N2E1LDUsMCwxLDEsNi44MTItMS44NDM4bDEuNzMxNSwxLjAwMmE3LjAwMDgsNy4wMDA4LDAsMSwwLTEwLjM0NjIsMi4wMzU2Yy0uNDU3Ljc0MjctMS4xMDIxLDEuODcxNi0yLjA3MzcsMy41NzI4WicvPgogIDxyZWN0IGlkPSdfVHJhbnNwYXJlbnRfUmVjdGFuZ2xlXycgZGF0YS1uYW1lPScmbHQ7VHJhbnNwYXJlbnQgUmVjdGFuZ2xlJmd0OycgY2xhc3M9J2Nscy0xJwogICAgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJy8+Cjwvc3ZnPg==">
+      <bpmn:extensionElements>
+        <zeebe:properties>
+          <zeebe:property name="inbound.type" value="io.camunda:webhook:1" />
+          <zeebe:property name="inbound.method" value="post" />
+          <zeebe:property name="inbound.context" value="wishlistN8nResponse" />
+          <zeebe:property name="inbound.shouldValidateHmac" value="disabled" />
+          <zeebe:property name="inbound.auth.type" value="NONE" />
+          <zeebe:property name="consumeUnmatchedEvents" value="true" />
+          <zeebe:property name="correlationKeyExpression" value="=&#34;fixed&#34;" />
+          <zeebe:property name="deduplicationModeManualFlag" value="false" />
+          <zeebe:property name="deduplicationMode" value="AUTO" />
+          <zeebe:property name="resultVariable" value="n8nResponse" />
+          <zeebe:property name="resultExpression" value="" />
+        </zeebe:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1iwtjzg</bpmn:incoming>
+      <bpmn:outgoing>Flow_1npzuj0</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0e70nak" messageRef="Message_1vy7kpx" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_03ptxr2" sourceRef="Activity_1llznhc" targetRef="Activity_inspectN8nResult" />
+    <bpmn:scriptTask id="Activity_1llznhc" name="Deconstruct n8n response">
+      <bpmn:extensionElements>
+        <zeebe:script expression="=1" resultVariable="dummy" />
+        <zeebe:ioMapping>
+          <zeebe:output source="=n8nResponse.request.body.output" target="n8nOutput" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1npzuj0</bpmn:incoming>
+      <bpmn:outgoing>Flow_03ptxr2</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:textAnnotation id="TextAnnotation_1h1mv96">
+      <bpmn:text>"localhost" -&gt; "host.docker.internal"</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_00aevkn" associationDirection="None" sourceRef="Activity_callN8n" targetRef="TextAnnotation_1h1mv96" />
+    <bpmn:textAnnotation id="TextAnnotation_1gfwriy">
+      <bpmn:text>"dummy" correlation</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1ione7k" associationDirection="None" sourceRef="Event_waitForN8nResponse" targetRef="TextAnnotation_1gfwriy" />
+  </bpmn:process>
+  <bpmn:message id="Message_0n0356b" name="53f11535-87ee-4eab-87e1-cb8464c3fe22" zeebe:modelerTemplate="io.camunda.connectors.webhook.WebhookConnectorStartMessage.v1" />
+  <bpmn:message id="Message_1vy7kpx" name="e6ecb5a5-65f4-407b-96ba-7b20777a7e84" zeebe:modelerTemplate="io.camunda.connectors.webhook.WebhookConnectorIntermediate.v1">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=&#34;fixed&#34;" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_wishlist_2025">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_wishlistForm">
+        <dc:Bounds x="182" y="112" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="169" y="155" width="63" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0jq2pbv_di" bpmnElement="StartEvent_webHook">
+        <dc:Bounds x="182" y="280" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="156" y="323" width="89" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0yorn3e_di" bpmnElement="Gateway_0yorn3e" isMarkerVisible="true">
+        <dc:Bounds x="385" y="193" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_17icuoa_di" bpmnElement="Activity_buildRequest">
+        <dc:Bounds x="480" y="178" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0bd4kde_di" bpmnElement="Activity_callN8n">
+        <dc:Bounds x="635" y="178" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0sy4phs_di" bpmnElement="Activity_inquireApproval">
+        <dc:Bounds x="1270" y="178" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1rg3t36_di" bpmnElement="Activity_inspectN8nResult">
+        <dc:Bounds x="990" y="178" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_07h5hex_di" bpmnElement="Gateway_07h5hex" isMarkerVisible="true">
+        <dc:Bounds x="1125" y="193" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0as7t6k_di" bpmnElement="Gateway_0as7t6k" isMarkerVisible="true">
+        <dc:Bounds x="1395" y="193" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1vng152_di" bpmnElement="Activity_wishRejected">
+        <dc:Bounds x="1570" y="330" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0gsnas3_di" bpmnElement="Activity_wishGranted">
+        <dc:Bounds x="1570" y="178" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1f5h75q_di" bpmnElement="Event_granted">
+        <dc:Bounds x="1712" y="200" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1692" y="243" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_03rqku1_di" bpmnElement="Event_rejected">
+        <dc:Bounds x="1712" y="352" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1691" y="395" width="78" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0cwzeig_di" bpmnElement="Activity_deconstructWebHookStart">
+        <dc:Bounds x="270" y="258" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_14k85hv_di" bpmnElement="Gateway_14k85hv" isMarkerVisible="true">
+        <dc:Bounds x="1395" y="345" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_05xyjdx_di" bpmnElement="Gateway_05xyjdx" isMarkerVisible="true">
+        <dc:Bounds x="1485" y="193" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0do6r4u_di" bpmnElement="Event_waitForN8nResponse">
+        <dc:Bounds x="772" y="200" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="761" y="243" width="60" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0furb1w_di" bpmnElement="Activity_1llznhc">
+        <dc:Bounds x="850" y="178" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1h1mv96_di" bpmnElement="TextAnnotation_1h1mv96">
+        <dc:Bounds x="740" y="90" width="210" height="26" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1gfwriy_di" bpmnElement="TextAnnotation_1gfwriy">
+        <dc:Bounds x="810" y="120" width="140" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0p9h33i_di" bpmnElement="Flow_0p9h33i">
+        <di:waypoint x="218" y="130" />
+        <di:waypoint x="410" y="130" />
+        <di:waypoint x="410" y="193" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0nza9ua_di" bpmnElement="Flow_0nza9ua">
+        <di:waypoint x="370" y="298" />
+        <di:waypoint x="410" y="298" />
+        <di:waypoint x="410" y="243" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1u7p1n8_di" bpmnElement="Flow_1u7p1n8">
+        <di:waypoint x="435" y="218" />
+        <di:waypoint x="480" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1al38at_di" bpmnElement="Flow_1al38at">
+        <di:waypoint x="580" y="218" />
+        <di:waypoint x="635" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1iwtjzg_di" bpmnElement="Flow_1iwtjzg">
+        <di:waypoint x="735" y="218" />
+        <di:waypoint x="772" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1axx2ez_di" bpmnElement="Flow_1axx2ez">
+        <di:waypoint x="1090" y="218" />
+        <di:waypoint x="1125" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13638yz_di" bpmnElement="Flow_13638yz">
+        <di:waypoint x="1175" y="218" />
+        <di:waypoint x="1270" y="218" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1167" y="193" width="86" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18gb485_di" bpmnElement="Flow_18gb485">
+        <di:waypoint x="1370" y="218" />
+        <di:waypoint x="1395" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1cf3kd2_di" bpmnElement="Flow_1cf3kd2">
+        <di:waypoint x="1150" y="243" />
+        <di:waypoint x="1150" y="370" />
+        <di:waypoint x="1395" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0pv7omm_di" bpmnElement="Flow_0pv7omm">
+        <di:waypoint x="1445" y="218" />
+        <di:waypoint x="1485" y="218" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1435" y="173" width="38" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0kehwhp_di" bpmnElement="Flow_0kehwhp">
+        <di:waypoint x="1670" y="218" />
+        <di:waypoint x="1712" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xhzx7a_di" bpmnElement="Flow_1xhzx7a">
+        <di:waypoint x="1670" y="370" />
+        <di:waypoint x="1712" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1iumie1_di" bpmnElement="Flow_1iumie1">
+        <di:waypoint x="218" y="298" />
+        <di:waypoint x="270" y="298" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0vbcsak_di" bpmnElement="Flow_0vbcsak">
+        <di:waypoint x="1150" y="193" />
+        <di:waypoint x="1150" y="100" />
+        <di:waypoint x="1510" y="100" />
+        <di:waypoint x="1510" y="190" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1156" y="82" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16p01o2_di" bpmnElement="Flow_16p01o2">
+        <di:waypoint x="1420" y="243" />
+        <di:waypoint x="1420" y="345" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13a5t1a_di" bpmnElement="Flow_13a5t1a">
+        <di:waypoint x="1445" y="370" />
+        <di:waypoint x="1570" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xrkxlj_di" bpmnElement="Flow_1xrkxlj">
+        <di:waypoint x="1535" y="218" />
+        <di:waypoint x="1570" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1npzuj0_di" bpmnElement="Flow_1npzuj0">
+        <di:waypoint x="808" y="218" />
+        <di:waypoint x="850" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03ptxr2_di" bpmnElement="Flow_03ptxr2">
+        <di:waypoint x="950" y="218" />
+        <di:waypoint x="990" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_00aevkn_di" bpmnElement="Association_00aevkn">
+        <di:waypoint x="722" y="178" />
+        <di:waypoint x="780" y="116" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1ione7k_di" bpmnElement="Association_1ione7k">
+        <di:waypoint x="802" y="204" />
+        <di:waypoint x="847" y="150" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

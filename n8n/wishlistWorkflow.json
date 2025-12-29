@@ -1,0 +1,137 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "wishlist",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8bbc317e-8b94-464a-9118-90c0372ed16e",
+      "name": "Webhook",
+      "webhookId": "4db41c7d-24db-4c0d-ad0c-2d460da3895d"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Process the wishlist with its wishlistContent in accordance with your instructions.\n\nThe wishlist is from {{ $json.body.wishlistFrom }}. \n<wishlistContent>\n{{ $json.body.wishlistContent }}\n</wishlistContent>",
+        "options": {
+          "systemMessage": "# Context\n\nYou are a cheerful elf in Santa's workshop, tasked with reviewing children's wishlists. Your goal is to categorize each wish based on its feasibility and the level of approval required.\n\n## Instructions\n\nAnalyze the Wishlist: Take the provided list of wishes and evaluate each item carefully.\n\nCategorize Each Wish:\n- Too Expansive: Wishes that are extravagant or unrealistic, requiring significant resources or efforts.\n- Interesting but Requires Approval: Wishes that are intriguing but may need further discussion or approval from Santa before they can be granted.\n- Small and Can Be Granted Directly: Wishes that are simple and feasible, which you can immediately grant."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "3c3ebc03-dbac-40c9-aa55-786c22002108",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "mistralai/magistral-small-2509",
+          "mode": "list",
+          "cachedResultName": "mistralai/magistral-small-2509"
+        },
+        "builtInTools": {},
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        80,
+        208
+      ],
+      "id": "1b954702-1f08-469e-b968-9bb05d08734f",
+      "name": "local LM inference",
+      "credentials": {
+        "openAiApi": {
+          "id": "upLeqhSqVSxCNaLZ",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8086/inbound/wishlistN8nResponse",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "output",
+              "value": "={{ $json.output }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        560,
+        0
+      ],
+      "id": "eab0a6b2-b0f9-436b-a431-5ae68f1097f5",
+      "name": "Send response to camunda process instance"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "local LM inference": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send response to camunda process instance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "bf3bca2b-7333-44b4-8a35-cbf1d03f71fa",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8ea65895d83346866b9089ab12b701986958120301aae666a906f0e58de046d4"
+  },
+  "id": "BS3V950uT2TFHvnv",
+  "tags": []
+}
